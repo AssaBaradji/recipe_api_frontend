@@ -27,13 +27,13 @@ Nos recettes est une application web développée avec Vue.js, permettant aux ut
 1. Clonez le repository GitHub :
 
 ```bash
-git clone https://github.com/AssaBaradji/recipe_api_bakend.git
+git clone https://github.com/AssaBaradji/recipe_api_frontend.git
 ````
 
 2.Accédez au répertoire du projet :
 
 ```bash
-   cd recette
+   cd recipe_api_frontend
 ```
 
 3.Installez les dépendances :
