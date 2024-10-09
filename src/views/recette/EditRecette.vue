@@ -11,25 +11,30 @@ const recipeStore = useRecipeStore();
 const categoryStore = useCategoryStore();
 const router = useRouter();
 const newRecipe = ref({ title: "", type: "", ingredient: "", categoryId: "" });
-
 const recipeId = Number(router.currentRoute.value.params.id);
 
-onMounted(async () => {
-  if (recipeId) {
-    const recette = await recipeStore.getRecipeById(recipeId);
-    if (recette) {
-      newRecipe.value = {
-        title: recette.title,
-        type: recette.type,
-        ingredient: recette.ingredient,
-        categoryId: recette.categoryId,
-      };
-    } else {
-      console.error("Recette non trouvée pour l'ID :", recipeId);
-    }
-  }
+const isLoading = ref(true);
 
-  await categoryStore.loadCategoriesFromAPI();
+onMounted(async () => {
+  try {
+    const [categoriesLoaded, recipeLoaded] = await Promise.all([
+      categoryStore.loadCategoriesFromAPI(),
+      recipeId ? recipeStore.getRecipeById(recipeId) : Promise.resolve(null),
+    ]);
+
+    if (recipeLoaded) {
+      newRecipe.value = {
+        title: recipeLoaded.title,
+        type: recipeLoaded.type,
+        ingredient: recipeLoaded.ingredient,
+        categoryId: recipeLoaded.categoryId,
+      };
+    }
+  } catch (error) {
+    console.error("Erreur lors du chargement des données :", error);
+  } finally {
+    isLoading.value = false;
+  }
 });
 
 const saveRecipe = async () => {
@@ -57,7 +62,11 @@ const saveRecipe = async () => {
 
 <template>
   <div class="container mt-5">
-    <div class="p-4 bg-light rounded shadow-sm">
+    <div v-if="isLoading" class="text-center">
+      <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
+
+    <div v-else class="p-4 bg-light rounded shadow-sm">
       <div class="input-group mb-4">
         <span class="input-group-text bg-warning text-dark fw-bold">
           <i class="fas fa-pen"></i>{{ t("recipes.edit_form.title") }}
@@ -122,6 +131,7 @@ const saveRecipe = async () => {
     </div>
   </div>
 </template>
+
 
 <style scoped></style>
 

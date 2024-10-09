@@ -62,7 +62,6 @@
       </tbody>
     </table>
 
-    <!-- Modal de confirmation -->
     <div
       v-if="showModal"
       class="modal d-block"
@@ -115,7 +114,6 @@ const router = useRouter();
 const showModal = ref(false);
 const selectedRecipeId = ref(null);
 
-// Fonction pour obtenir le nom de la catégorie à partir de son ID
 const getCategoryName = (categoryId) => {
   const category = categoryStore.categories.find(
     (cat) => cat.id === categoryId
@@ -125,7 +123,7 @@ const getCategoryName = (categoryId) => {
 
 onMounted(() => {
   recipeStore.loadDataFromApi();
-  categoryStore.loadCategoriesFromAPI(); // Chargement des catégories
+  categoryStore.loadCategoriesFromAPI();
 });
 
 const goToAddRecipePage = () => {

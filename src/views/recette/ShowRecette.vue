@@ -4,9 +4,11 @@ import { ref, onMounted } from "vue";
 import { Modal } from "bootstrap";
 import { useI18n } from "vue-i18n";
 import { useRecipeStore } from "@store/recipeStore";
+import { useCategoryStore } from "@store/categoryStore";
 
 const { t } = useI18n();
 const store = useRecipeStore();
+const categoryStore = useCategoryStore();
 const recettetModal = ref(null);
 const router = useRouter();
 const route = useRoute();
@@ -34,7 +36,15 @@ onMounted(async () => {
     const bootstrapModal = new Modal(modalElement);
     bootstrapModal.show();
   }
+  categoryStore.loadCategoriesFromAPI();
 });
+
+const getCategoryName = (categoryId) => {
+  const category = categoryStore.categories.find(
+    (cat) => cat.id === categoryId
+  );
+  return category ? category.name : "Catégorie non définie";
+};
 </script>
 
 <template>
@@ -87,12 +97,6 @@ onMounted(async () => {
                 >{{ selectedRecipe.type }}
               </p>
 
-              <p v-if="selectedRecipe?.category">
-                <span class="fw-bold"
-                  >{{ t("recipes.view_form.champ_categorie") }} : </span
-                >{{ selectedRecipe.category }}
-              </p>
-
               <div
                 v-if="
                   selectedRecipe?.ingredient &&
@@ -115,10 +119,10 @@ onMounted(async () => {
                 >Aucun ingrédient disponible.
               </p>
 
-              <p v-if="!selectedRecipe?.category">
+              <p v-if="selectedRecipe?.category_id">
                 <span class="fw-bold"
                   >{{ t("recipes.view_form.champ_categorie") }} : </span
-                >Catégorie non spécifiée.
+                >{{ getCategoryName(selectedRecipe.category_id) }}
               </p>
             </template>
           </div>
