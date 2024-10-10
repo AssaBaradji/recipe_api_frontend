@@ -142,4 +142,3 @@ const getCategoryName = (categoryId) => {
     </div>
   </div>
 </template>
-

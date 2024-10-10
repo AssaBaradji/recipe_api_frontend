@@ -85,7 +85,7 @@ const messages = {
         option_dessert: "Dessert",
         ingredients: "Ingredients",
         categorie: "Category",
-        button: "Save",
+        save: "Save",
       },
       view_form: {
         champ_detail: "Recipe details",
@@ -211,7 +211,7 @@ const messages = {
         option_dessert: "Dessert",
         ingredients: "Ingrédients",
         categorie: "Catégorie",
-        button: "Sauvager",
+        save: "Sauvegarder",
       },
       view_form: {
         champ_detail: "Détail du recette",

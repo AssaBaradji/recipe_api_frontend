@@ -32,8 +32,10 @@ export const useCategoryStore = defineStore("category", () => {
       categories.value = categories.value.filter(
         (category) => category.id !== categoryId
       );
-    } catch (error) {
-      console.error("Erreur lors de la suppression de la catégorie:", error);
+    } catch {
+      alert(
+        "Impossible de supprimer cette catégorie car elle est liée à une recette."
+      );
     }
   };
 

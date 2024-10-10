@@ -27,9 +27,9 @@
     </div>
   </div>
 </template>
-  
-  <script setup>
-import { ref, watch } from "vue";
+
+<script setup>
+import { ref, watch, defineProps, defineEmits } from "vue";  // Assurez-vous que defineProps et defineEmits sont importés
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
@@ -47,9 +47,10 @@ const props = defineProps({
 const emit = defineEmits(["close"]);
 
 const closeModal = () => {
-  emit("close");
+  emit("close");  // Émet l'événement 'close' lorsque le modal est fermé
 };
 
+// Surveillez la propriété 'show' et fermez le modal si elle devient false
 watch(
   () => props.show,
   (newVal) => {
@@ -59,12 +60,11 @@ watch(
   }
 );
 </script>
-  
-  <style scoped>
+
+<style scoped>
 .modal {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 </style>
-  

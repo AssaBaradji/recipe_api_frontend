@@ -1,15 +1,27 @@
-# Nos recettes
+# README pour le Frontend - Nos Recettes
 
 ## Description
 
-Nos recettes est une application web développée avec Vue.js, permettant aux utilisateurs de naviguer facilement entre les différentes pages, telles que l'Accueil et les Recettes. Elle est conçue avec un design responsive pour offrir une expérience utilisateur optimale sur divers appareils.
+Nos Recettes est une application web développée avec **Vue.js** qui permet aux utilisateurs de naviguer entre les pages Accueil, Recettes et Catégories. Elle est conçue avec un design responsive pour offrir une expérience utilisateur optimale sur divers appareils.
 
 ## Fonctionnalités
 
-- **Ajout de recettes** : Les utilisateurs peuvent ajouter de nouvelles recettes en spécifiant le titre, les ingrédients et le type de recette (entrée, plat, dessert, etc.).
+## Recettes
+
+- **Ajout de recettes** : Les utilisateurs peuvent ajouter de nouvelles recettes en spécifiant le titre, les ingrédients ,le type de recette (entrée, plat, dessert, etc.) et la catégorie.
 - **Modification de recettes** : Les recettes existantes peuvent être modifiées.
 - **Suppression de recettes** : Les utilisateurs peuvent supprimer des recettes de la liste.
-- **Affichage des recettes** : Une liste de toutes les recettes disponibles est affichée, avec la possibilité de voir les détails de chaque recette.
+- **Affichage des recettes** : Liste de toutes les recettes disponibles avec possibilité de voir les détails.
+
+## Categories
+
+- **Ajout de catégories** : Les utilisateurs peuvent ajouter de nouvelles catégories en spécifiant le nom de la catégorie (par exemple, cuisine italienne, cuisine indienne, etc.).
+
+- **Modification de catégories** : Les catégories existantes peuvent être modifiées pour mettre à jour leur nom.
+
+- **Suppression de catégories** : Les utilisateurs peuvent supprimer des catégories de la liste.
+
+- **Affichage des catégories** : Liste de toutes les catégories disponibles avec possibilité de voir les détails de chaque catégorie.
 
 ## Technologies Utilisées
 
@@ -19,16 +31,18 @@ Nos recettes est une application web développée avec Vue.js, permettant aux ut
 
 ## Prérequis
 
-- Node.js (version 14 ou supérieure)
-- npm
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
+
+- [Node.js](https://nodejs.org) (version 14 ou supérieure)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
 
 ## Installation
 
-1. Clonez le repository GitHub :
+1. Clonez le dépôt :
 
 ```bash
-git clone https://github.com/AssaBaradji/recipe_api_frontend.git
-````
+   git clone https://github.com/AssaBaradji/recipe_api_frontend.git
+```
 
 2.Accédez au répertoire du projet :
 
@@ -44,12 +58,16 @@ git clone https://github.com/AssaBaradji/recipe_api_frontend.git
 
 ## Utilisation
 
-1. Pour démarrer l'application en mode développement :
+Pour démarrer l'application en mode développement :
 
 ```bash
-   npm run serve
+npm run dev
 ```
+
+## Connexion Backend et Frontend
+
+Le frontend (Vue.js) interagit avec le backend via des API HTTP. Assurez-vous que le serveur backend est en cours d'exécution avant de démarrer l'application frontend.
 
 ## Auteur
 
-- [Assa baradji](https://github.com/AssaBaradji)
+[Assa Baradji](https://github.com/AssaBaradji)

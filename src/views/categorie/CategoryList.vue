@@ -133,6 +133,7 @@ const showModal = ref(false);
 const showDetailModal = ref(false);
 const selectedCategoryId = ref(null);
 const selectedCategory = ref(null);
+const errorMessage = ref("");
 
 onMounted(() => {
   store.loadCategoriesFromAPI();
@@ -153,10 +154,23 @@ const goToEditCategoryPage = (categoryId) => {
 
 const confirmDeleteCategory = async () => {
   if (selectedCategoryId.value) {
-    await store.deleteCategory(selectedCategoryId.value);
-    showModal.value = false;
-    selectedCategoryId.value = null;
-    await store.loadCategoriesFromAPI();
+    try {
+      // Tenter de supprimer la catégorie
+      await store.deleteCategory(selectedCategoryId.value);
+      showModal.value = false;
+      selectedCategoryId.value = null;
+      errorMessage.value = ""; // Réinitialiser le message d'erreur s'il y a un succès
+      await store.loadCategoriesFromAPI();
+    } catch (error) {
+      // Gérer les erreurs
+      if (error.response && error.response.status === 409) {
+        // Si l'erreur est un conflit (statut 409), catégorie liée à une recette
+        errorMessage.value = t("category.table.error_linked_to_recipe");
+      } else {
+        errorMessage.value = t("category.table.generic_error");
+      }
+      showModal.value = false;
+    }
   }
 };
 
@@ -165,13 +179,13 @@ const closeModal = () => {
   selectedCategoryId.value = null;
 };
 
-// Fonction pour ouvrir la modal de détails
+
 const openDetailModal = (category) => {
   selectedCategory.value = category;
   showDetailModal.value = true;
 };
 
-// Fonction pour fermer la modal de détails
+
 const closeDetailModal = () => {
   showDetailModal.value = false;
   selectedCategory.value = null;
